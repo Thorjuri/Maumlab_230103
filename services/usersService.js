@@ -75,15 +75,14 @@ class UsersService {
 
     updateInfo = async(loginId, nickname, email)=> {
         const user = await this.usersRepository.checkUser(loginId);
-        if(!nickname && email){
-            nickname = user.nickname;  
-        }else if(!email && nickname){
-            email = null;
-        }else if(!nickname && !email){
+        if(!nickname && !email){
             this.err.status = 400;
-            this.err.message = '닉네임과 이메일 중 한 가지는 필수 입력 사항입니다.';
+            this.err.message = '변경할 사항을 입력해 주세요';
             throw this.err;
         };
+        nickname = nickname || user.nickname;
+        email = email || user.email;
+        
         //닉네임 중복확인 기존 API 이용 가정
         const data = await this.usersRepository.updateInfo(loginId, nickname, email);
         return { data, message: '회원정보가 수정되었습니다.' };
