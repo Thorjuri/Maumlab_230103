@@ -23,6 +23,6 @@ app.options("*", cors());
 app.use("/api", Router);
 app.use(errorHandlerMiddleware);
 
-app.listen((Port)=> {
+app.listen(Port, ()=> {
     console.log(`${Port}번 서버 실행됩니다.`);
 });
