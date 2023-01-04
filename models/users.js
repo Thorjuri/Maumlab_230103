@@ -10,9 +10,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-    }
-  }
+      this.hasMany(models.Posts, {
+        as: "Posts",
+        foreignKey: "nickname",
+        sourceKey: "nickname",
+        onDelete: "cascade",
+      });
+      this.hasMany(models.Comments, {
+        as: "Comments",
+        foreignKey: "nickname",
+        sourceKey: "nickname",
+        onDelete: "cascade",
+      });
+      this.hasMany(models.Replies, {
+        as: "Replies",
+        foreignKey: "nickname",
+        sourceKey: "nickname",
+        onDelete: "cascade",
+      });
+    };
+  };
   Users.init({
     userId: {
       primaryKey: true,
